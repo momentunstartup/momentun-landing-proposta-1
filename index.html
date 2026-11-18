@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Landing do Momentun: proposta</title>
+<link rel="stylesheet" href="assets/fontes.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<style>
+/* A landing proposta em uma coluna de seções; o herói mostra o produto (a mensagem no WhatsApp e as confirmações chegando). Tokens reais do Momentun, escuro primeiro. */
+:root{
+  --bg:#0D061B; --surface:#1D1133; --surface-2:#23143A; --border:#2A1B42; --border-strong:#4A3568;
+  --text:#FFFFFF; --text-secondary:#D5CCED; --text-muted:#9A8EB3;
+  --primary:#781CA0; --on-primary:#FFFFFF; --primary-surface:#44075F; --primary-text:#CD93E6;
+  --accent:#FFC534; --on-accent:#1F032B; --success-bg:#20263A; --success-fg:#8BB3B0;
+  --balao:#2B1C44; --balao-meu:#3D2160;
+  --font-display:"Urbanist","Inter",system-ui,sans-serif; --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --radius-sm:8px; --radius-md:12px; --radius-lg:16px; --radius-pill:999px;
+  --mov-medio:240ms; --curva:cubic-bezier(.2,0,0,1);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#F6EDFC; --surface:#FCFAFE; --surface-2:#F1E9F8; --border:#EDE2F5; --border-strong:#C9B8DC;
+  --text:#2B1150; --text-secondary:#6D5992; --text-muted:#736295;
+  --primary:#5D0982; --primary-surface:#FAF1FD; --primary-text:#5D0982; --success-bg:#DDE9EB; --success-fg:#2C6A69;
+  --balao:#FFFFFF; --balao-meu:#EFE2F9; color-scheme:light;}}
+:root[data-theme="light"]{
+  --bg:#F6EDFC; --surface:#FCFAFE; --surface-2:#F1E9F8; --border:#EDE2F5; --border-strong:#C9B8DC;
+  --text:#2B1150; --text-secondary:#6D5992; --text-muted:#736295;
+  --primary:#5D0982; --primary-surface:#FAF1FD; --primary-text:#5D0982; --success-bg:#DDE9EB; --success-fg:#2C6A69;
+  --balao:#FFFFFF; --balao-meu:#EFE2F9; color-scheme:light;}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font:16px/1.6 var(--font-body);margin:0}
+.faixa{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.miolo{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);margin:0;line-height:1.15;text-wrap:balance}
+p{margin:0}
+a{color:var(--primary-text)}
+.btn{font:600 15px/1 var(--font-body);border-radius:var(--radius-sm);padding:14px 20px;border:1px solid transparent;cursor:pointer;min-height:48px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;transition:transform 140ms var(--curva)}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--primary-text);outline-offset:2px}
+.amarelo{background:var(--accent);color:var(--on-accent)}
+.secundario{background:transparent;color:var(--text);border-color:var(--border-strong)}
+.fantasma{background:transparent;color:var(--text);padding-inline:10px}
+/* notas da proposta */
+.nota{display:inline-flex;align-items:center;gap:6px;font:600 11.5px/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--on-accent);background:var(--accent);padding:5px 9px;border-radius:var(--radius-pill);width:max-content}
+.sem-notas .nota{display:none}
+.barra-notas{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--border)}
+.barra-notas .miolo{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding-block:10px}
+.barra-notas p{font-size:14px;color:var(--text-secondary)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.chave{display:inline-flex;align-items:center;gap:8px;font-size:14px;cursor:pointer}
+/* topo */
+.topo .miolo{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:18px}
+.logo{font:800 22px/1 var(--font-display);letter-spacing:-.01em}
+.topo nav{display:flex;gap:20px;font-weight:500;font-size:15px}
+.topo nav a{color:var(--text-secondary);text-decoration:none}
+.topo .acoes{display:flex;gap:8px;align-items:center}
+@media (max-width:820px){.topo nav{display:none}}
+/* herói */
+.heroi .miolo{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:center;padding-block:32px 56px}
+@media (max-width:860px){.heroi .miolo{grid-template-columns:1fr}}
+.heroi-texto{display:flex;flex-direction:column;gap:18px}
+.heroi h1{font-size:clamp(34px,5.4vw,58px);font-weight:800;letter-spacing:-.02em}
+.heroi h1 em{font-style:normal;color:var(--accent)}
+.heroi .sub{font-size:clamp(17px,2vw,20px);color:var(--text-secondary);max-width:46ch}
+.heroi .acoes{display:flex;flex-wrap:wrap;gap:10px}
+.heroi .mini{font-size:14px;color:var(--text-muted)}
+.entra{animation:entra 420ms var(--curva) both}
+.entra.d1{animation-delay:80ms}.entra.d2{animation-delay:160ms}.entra.d3{animation-delay:240ms}
+@keyframes entra{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* o celular do herói */
+.palco{display:flex;justify-content:center}
+.cel{width:100%;max-width:320px;border:1px solid var(--border-strong);border-radius:30px;background:var(--surface);padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 20px 50px rgb(0 0 0 / .35)}
+.cel .cab{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.cel .av{width:34px;height:34px;border-radius:50%;background:var(--primary);display:grid;place-items:center;font:800 14px var(--font-display);color:var(--on-primary)}
+.cel .cab small{display:block;color:var(--text-muted);font-size:12px}
+.balao{background:var(--balao);border:1px solid var(--border);border-radius:14px 14px 14px 4px;padding:10px 12px;font-size:14px;line-height:1.45}
+.botoes-wpp{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.botoes-wpp span{border:1px solid var(--border-strong);border-radius:10px;padding:8px;text-align:center;font-size:13px;font-weight:600;color:var(--primary-text)}
+.balao.meu{background:var(--balao-meu);border-radius:14px 14px 4px 14px;align-self:flex-end;font-weight:600}
+.placar{display:flex;justify-content:space-between;gap:8px;background:var(--surface-2);border-radius:var(--radius-md);padding:10px 12px;margin-top:4px}
+.placar b{font:800 22px/1 var(--font-display);font-variant-numeric:tabular-nums;display:block}
+.placar span{font-size:11.5px;color:var(--text-muted)}
+.anim .balao.meu,.anim .placar{opacity:0;transform:translateY(8px)}
+.anim.tocando .balao.meu{animation:entra 320ms var(--curva) 900ms both}
+.anim.tocando .placar{animation:entra 320ms var(--curva) 1500ms both}
+/* seções */
+.secao{padding-block:56px}
+.secao .miolo{display:flex;flex-direction:column;gap:28px}
+.secao h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;letter-spacing:-.01em}
+.secao .intro{color:var(--text-secondary);max-width:60ch;font-size:17px}
+.alt{background:var(--surface)}
+.passos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:p}
+@media (max-width:760px){.passos{grid-template-columns:1fr}}
+.passo{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px;display:flex;flex-direction:column;gap:8px}
+.passo .n{font:800 15px/1 var(--font-display);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--primary-surface);color:var(--primary-text)}
+.passo h3{font-size:19px}
+.passo p{color:var(--text-secondary);font-size:15px}
+.recursos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:900px){.recursos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.recursos{grid-template-columns:1fr}}
+.recurso{display:flex;flex-direction:column;gap:6px;padding:4px 0}
+.recurso .ic{width:40px;height:40px;border-radius:10px;background:var(--primary-surface);color:var(--primary-text);display:grid;place-items:center;margin-bottom:6px}
+.recurso h3{font-size:18px}
+.recurso p{color:var(--text-secondary);font-size:15px}
+.custo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:760px){.custo{grid-template-columns:1fr}}
+.custo ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+.custo li{display:flex;gap:12px;align-items:flex-start}
+.custo li .ok{flex:0 0 22px;height:22px;border-radius:50%;background:var(--success-bg);color:var(--success-fg);display:grid;place-items:center;font-size:13px;font-weight:700;margin-top:2px}
+.caixa-custo{background:var(--bg);border:1px solid var(--border-strong);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:10px}
+.caixa-custo .linha{display:flex;justify-content:space-between;gap:12px;font-size:15px;border-bottom:1px dashed var(--border);padding-bottom:8px}
+.caixa-custo .linha:last-of-type{border-bottom:0}
+.caixa-custo .linha b{font-variant-numeric:tabular-nums}
+.confianca{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:760px){.confianca{grid-template-columns:1fr}}
+.confianca div{border-left:3px solid var(--primary-text);padding:4px 0 4px 14px;display:flex;flex-direction:column;gap:4px}
+.confianca p{color:var(--text-secondary);font-size:15px}
+.depo{border:1px dashed var(--border-strong);border-radius:var(--radius-md);padding:18px;color:var(--text-muted);font-size:14.5px}
+.faq{display:flex;flex-direction:column;gap:10px;max-width:780px}
+.faq details{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:0 18px}
+.faq summary{cursor:pointer;font-weight:600;padding:16px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--primary-text);font-size:20px;line-height:1;transition:transform 150ms var(--curva)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--text-secondary);padding-bottom:16px}
+.final{background:linear-gradient(135deg,var(--primary-surface),var(--surface));}
+.final .miolo{align-items:center;text-align:center}
+.final .acoes{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.rodape .miolo{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;padding-block:24px;color:var(--text-muted);font-size:14px;border-top:1px solid var(--border)}
+.surge{opacity:1}
+@media (prefers-reduced-motion:no-preference){.js .surge{opacity:0;transform:translateY(14px);transition:opacity 420ms var(--curva),transform 420ms var(--curva)}.js .surge.visto{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.entra,.anim.tocando .balao.meu,.anim.tocando .placar{animation:none}.anim .balao.meu,.anim .placar{opacity:1;transform:none}.btn,.faq summary::after{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="barra-notas faixa"><div class="miolo">
+<p>Proposta de landing para aprovar. As etiquetas amarelas mostram o que mudou em relação à atual.</p>
+<label class="chave"><input type="checkbox" id="notas" checked> Mostrar as etiquetas</label>
+</div></div>
+
+<header class="topo faixa"><div class="miolo">
+<span class="logo">momentun</span>
+<nav aria-label="Seções"><a href="#como">Como funciona</a><a href="#recursos">Recursos</a><a href="#custo">Quanto custa</a><a href="#perguntas">Perguntas</a></nav>
+<div class="acoes"><a class="btn fantasma" href="#final">Entrar</a><a class="btn amarelo" href="#final">Começar agora</a></div>
+</div></header>
+
+<section class="heroi faixa"><div class="miolo">
+<div class="heroi-texto">
+<span class="nota entra">Texto direto e um amarelo só</span>
+<h1 class="entra d1">Os convites saem pelo WhatsApp. As confirmações <em>chegam sozinhas.</em></h1>
+<p class="sub entra d2">Para cerimonialistas: a lista de convidados vira mensagem, cada um confirma com um toque e você acompanha tudo num painel. Sem planilha e sem cobrar convidado um por um.</p>
+<div class="acoes entra d3"><a class="btn amarelo" href="#final">Começar agora</a><a class="btn secundario" href="#final">Ver demonstração</a></div>
+<p class="mini entra d3">No piloto, o primeiro evento tem mensagens de cortesia. Você vê o custo antes de qualquer envio.</p>
+</div>
+<div class="palco">
+<div class="cel anim" id="cel" aria-label="Exemplo de convite no WhatsApp">
+<span class="nota" style="align-self:center">O produto em ação, animado</span>
+<div class="cab"><span class="av" aria-hidden="true">M</span><div><b>Casamento Ana &amp; Pedro</b><small>pelo WhatsApp oficial</small></div></div>
+<div class="balao">Olá, Família Alves! Vocês foram convidados para o casamento de Ana &amp; Pedro, no dia 15/12, às 20h. Vão comparecer?</div>
+<div class="botoes-wpp"><span>Sim, vamos</span><span>Não poderemos</span></div>
+<div class="balao meu">Sim, vamos ✓</div>
+<div class="placar"><div><b id="n-conf">96</b><span>confirmados</span></div><div><b>14</b><span>sem resposta</span></div><div><b>12</b><span>recusas</span></div></div>
+</div>
+</div>
+</div></section>
+
+<section class="secao alt faixa" id="como"><div class="miolo">
+<span class="nota surge">Novo: o passo a passo de verdade</span>
+<h2 class="surge">Como funciona</h2>
+<div class="passos">
+<div class="passo surge"><span class="n">1</span><h3>Traga a lista</h3><p>Importe a planilha que você já usa, puxe do Google ou cadastre à mão. Cada linha é um convite, com quantas pessoas vêm.</p></div>
+<div class="passo surge"><span class="n">2</span><h3>Programe as mensagens</h3><p>Save the date, convite, lembretes e véspera. Você vê quanto cada envio custa e autoriza só o que quiser.</p></div>
+<div class="passo surge"><span class="n">3</span><h3>Veja as respostas chegarem</h3><p>O convidado toca em "Sim" ou "Não" no próprio WhatsApp, e o painel mostra quem vem, quem recusou e quem falta responder.</p></div>
+</div>
+</div></section>
+
+<section class="secao faixa" id="recursos"><div class="miolo">
+<span class="nota surge">Seis benefícios no lugar de três detalhes técnicos</span>
+<h2 class="surge">Tudo do evento em um lugar só</h2>
+<div class="recursos">
+<div class="recurso surge"><span class="ic" aria-hidden="true">✉</span><h3>Chega de cobrar confirmação</h3><p>Lembretes saem na data certa só para quem ainda não respondeu.</p></div>
+<div class="recurso surge"><span class="ic" aria-hidden="true">✓</span><h3>O convidado não instala nada</h3><p>Ele confirma pelo WhatsApp ou pelo link do convite, dizendo quantos adultos e crianças vêm.</p></div>
+<div class="recurso surge"><span class="ic" aria-hidden="true">▤</span><h3>Um painel que responde na hora</h3><p>Confirmados, recusas, lugares ocupados e o que precisa de você hoje.</p></div>
+<div class="recurso surge"><span class="ic" aria-hidden="true">≡</span><h3>Cerimonial por link</h3><p>Os fornecedores sempre veem a versão mais nova do roteiro, sem reenviar arquivo.</p></div>
+<div class="recurso surge"><span class="ic" aria-hidden="true">R$</span><h3>Custos sob controle</h3><p>Quanto o evento custa, o que já foi pago e o que falta pagar, por fornecedor.</p></div>
+<div class="recurso surge"><span class="ic" aria-hidden="true">⌗</span><h3>Mesas e recepção</h3><p>Distribua os convidados nas mesas e faça o check-in na porta lendo o QR do convite.</p></div>
+</div>
+</div></section>
+
+<section class="secao alt faixa" id="custo"><div class="miolo">
+<span class="nota surge">"Quanto custa" no lugar dos planos com "Preço em breve"</span>
+<h2 class="surge">Quanto custa</h2>
+<div class="custo">
+<ul class="surge">
+<li><span class="ok" aria-hidden="true">✓</span><p><b>Sem mensalidade no piloto.</b> Você paga só as mensagens que enviar.</p></li>
+<li><span class="ok" aria-hidden="true">✓</span><p><b>Saldo pré-pago por Pix.</b> Sem cartão e sem cobrança surpresa: sem saldo, nada sai.</p></li>
+<li><span class="ok" aria-hidden="true">✓</span><p><b>O custo aparece antes.</b> Cada envio mostra o valor, e só sai quando você autoriza.</p></li>
+<li><span class="ok" aria-hidden="true">✓</span><p><b>O que não for usado volta para o saldo.</b></p></li>
+</ul>
+<div class="caixa-custo surge" aria-label="Exemplo de autorização">
+<span class="nota">Exemplo do que ela vê antes de enviar</span>
+<b style="font:700 18px var(--font-display)">Convite · 107 convidados</b>
+<div class="linha"><span>Custo previsto</span><b>R$ 7,49</b></div>
+<div class="linha"><span>Separado do saldo</span><b>R$ 44,94</b></div>
+<p style="color:var(--text-muted);font-size:13.5px">O que não for usado volta para o seu saldo. Valores ilustrativos.</p>
+</div>
+</div>
+</div></section>
+
+<section class="secao faixa"><div class="miolo">
+<span class="nota surge">Novo: confiança</span>
+<h2 class="surge">Feito para não dar dor de cabeça</h2>
+<div class="confianca">
+<div class="surge"><h3>WhatsApp oficial</h3><p>As mensagens saem pela via oficial do WhatsApp, e não por automação que bloqueia números.</p></div>
+<div class="surge"><h3>O convidado decide</h3><p>Quem responder "PARE" não recebe mais mensagens do evento.</p></div>
+<div class="surge"><h3>Dados protegidos</h3><p>Só você vê a lista. As páginas dos convites não aparecem em buscadores.</p></div>
+</div>
+<div class="depo surge">Aqui entra o depoimento de uma cerimonialista do piloto, quando houver um de verdade. Nada de depoimento inventado.</div>
+</div></section>
+
+<section class="secao alt faixa" id="perguntas"><div class="miolo">
+<span class="nota surge">Novo: perguntas frequentes (o Google também mostra)</span>
+<h2 class="surge">Perguntas frequentes</h2>
+<div class="faq">
+<details class="surge"><summary>O convidado precisa baixar algum aplicativo?</summary><p>Não. Ele recebe a mensagem no WhatsApp que já usa e confirma pelos botões, ou abre o link do convite no navegador.</p></details>
+<details class="surge"><summary>Preciso ter WhatsApp Business?</summary><p>Não. As mensagens saem pelo número oficial do Momentun, e não pelo seu celular.</p></details>
+<details class="surge"><summary>E quem não tem WhatsApp?</summary><p>Você entrega o link ou o QR do convite por outro meio. A confirmação cai no mesmo painel.</p></details>
+<details class="surge"><summary>Quanto custa um evento?</summary><p>Depende de quantas mensagens você enviar. O app mostra o custo de cada envio antes de você autorizar, e o que sobrar volta para o saldo.</p></details>
+<details class="surge"><summary>Os dados dos meus convidados ficam seguros?</summary><p>Sim. Só a sua conta vê a lista, o convidado pode pedir para não receber mais mensagens, e as páginas dos convites ficam fora dos buscadores.</p></details>
+</div>
+</div></section>
+
+<section class="secao final faixa" id="final"><div class="miolo">
+<span class="nota surge">Novo: chamada no fim da página</span>
+<h2 class="surge">Seu próximo evento, sem planilha de confirmação</h2>
+<p class="intro surge">Crie a conta e traga a lista. O primeiro evento do piloto tem mensagens de cortesia.</p>
+<div class="acoes surge"><a class="btn amarelo" href="#final">Começar agora</a><a class="btn secundario" href="#final">Ver demonstração</a></div>
+</div></section>
+
+<footer class="rodape faixa"><div class="miolo"><span>Momentun · para cerimonialistas e organizadores de eventos</span><span><a href="#final">Termos</a> · <a href="#final">Privacidade</a></span></div></footer>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  var chave=document.getElementById('notas');
+  chave.addEventListener('change',function(){document.body.classList.toggle('sem-notas',!chave.checked);});
+  // o celular do herói: a resposta chega e o placar conta
+  var cel=document.getElementById('cel'), n=document.getElementById('n-conf');
+  var reduz=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function tocar(){
+    if(reduz){return;}
+    cel.classList.remove('tocando'); void cel.offsetWidth; cel.classList.add('tocando');
+    n.textContent='95';
+    setTimeout(function(){n.textContent='96';},1700);
+  }
+  tocar(); setInterval(tocar,6000);
+  // seções surgem ao rolar (visíveis por padrão sem JS ou com movimento reduzido)
+  var els=document.querySelectorAll('.surge');
+  if(reduz||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('visto');});return;}
+  var io=new IntersectionObserver(function(ent){ent.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visto');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e);});
+  setTimeout(function(){els.forEach(function(e){e.classList.add('visto');});},2500);
+})();
+</script>
+</body>
+</html>
